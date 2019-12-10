@@ -3,14 +3,15 @@ const Schema = mongoose.Schema;
 
 
 const PaintingSchema  = new Schema ({
-    date: Date,
-    title: {type: String, required: true},
-    creator: mongoose.Types.ObjectId,
-    creatorUsername: String,
-    description: String,
-    tags: [String],
     image: String,
-})
+    title: {type: String, required: true},
+    description: String,
+    creator: mongoose.Types.ObjectId,
+    game: {type: String, enum: ["Legends of the Old West", "Warhammer Fantasy", "Warhammer 40k"]},
+    tags: [String],
+},{
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+  })
 
 const Painting = mongoose.model("Painting", PaintingSchema)
 

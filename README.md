@@ -134,7 +134,7 @@ With Maquetepinto you can forget about painting and enjoy the game!
 | `GET`      | `/signup`                | Renders `signup` form view.                                  |                                                          |
 | `POST`     | `/signup`                | Sends Sign Up info to the server and creates user in the DB. | { username, password }                                   |
 | `GET`      | `/profile`               | Renders `edit-profile` form view.                            |                                                          |
-| `PUT`      | `/profile`               | Private route. Updates user in DB and renders `/profile`.    | { email, password, [firstName], [lastName], [imageUrl] } |
+| `PATCH`    | `/profile`               | Private route. Updates user in DB and renders `/profile`.    | { *parameters to update* }                               |
 | `DELETE`   | `/profile`               | Private route. Renders the `signup` view.                    |                                                          |
 | `GET`      | `/profile/:userId`       | Renders user profile                                         |                                                          |
 | `GET`      | `/invoice/:invoiceId`    | Invoice display.                                             |                                                          |
@@ -142,6 +142,16 @@ With Maquetepinto you can forget about painting and enjoy the game!
 | `POST`     | `/pinting`               | Posts new painting.                                          | { user_id, title, comment_text, location }               |
 | `GET`      | `/pinting/:paintingId`   | Renders painting details view.                               |                                                          |
 | `PATCH`    | `/pinting/:paintingId`   | Updates painting info.                                       | { *parameters to update* }                               |
+
+
+## Services
+
+- Auth Service
+    - auth.login(user)
+    - auth.signup(user)
+    - auth.logout()
+
+
 ## Components
 
 - Login component
@@ -199,23 +209,26 @@ User model
     username: {type: String, required: true},
     paintings: [{type: mongoose.Types.ObjectId, ref: "Painting"}],
     delivers: Boolean,
+    mounts: Boolean,
     profilePic: String,
     techniques: [String]
-}
+},{
+    timestamps: { createdAt: "created_at"}
+  }
 ```
 
 Painting model
 
 ```
 {
-    date: Date,
-    title: {type: String, required: true},
-    creator: {type: mongoose.Types.ObjectId, ref: "User"},
-    creatorUsername: String,
-    description: String,
-    tags: [String],
     image: String,
-    likes: [{type: mongoose.Types.ObjectId, ref: "Like"}],
+    title: {type: String, required: true},
+    description: String,
+    creator: mongoose.Types.ObjectId,
+    game: {type: String, enum: ["Legends of the Old West", "Warhammer Fantasy", "Warhammer 40k"]},
+    tags: [String],
+},{
+    timestamps: { createdAt: "created_at"}
 }
 ```
 

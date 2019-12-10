@@ -6,9 +6,12 @@ const userSchema  = new Schema ({
     username: {type: String, required: true},
     paintings: [{type: mongoose.Types.ObjectId, ref: "Painting"}],
     delivers: Boolean,
+    mounts: Boolean,
     profilePic: String,
     techniques: [String]
-})
+},{
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+  })
 
 const User = mongoose.model("User", userSchema)
 
