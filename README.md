@@ -250,6 +250,12 @@ Likes model
 
 - Zoom in in painting view image.
 
+- Google Maps route in user view.
+
+- Stripe API to simulate payment.
+
+- Socket.io API in chat view.
+
 [See the Trello Board](https://trello.com/invite/b/WQswkY95/63016e5bab7265845f49d91710c94d02/maquetepinto)
 
 
